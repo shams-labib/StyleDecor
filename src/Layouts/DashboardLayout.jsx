@@ -4,7 +4,7 @@ import { FiUserPlus } from "react-icons/fi";
 import { Link, NavLink, Outlet } from "react-router";
 import logoImg from "../assets/logo.png";
 import { FaListOl, FaUserShield } from "react-icons/fa";
-import { LucidePencilRuler } from "lucide-react";
+import { ContactRound, LucidePencilRuler } from "lucide-react";
 import { BsCart4 } from "react-icons/bs";
 
 const DashboardLayout = () => {
@@ -67,6 +67,21 @@ const DashboardLayout = () => {
                 Homepage
               </NavLink>
             </li>
+            {/* User page */}
+            <li>
+              <NavLink
+                to="/dashboard/my-profile"
+                className={({ isActive }) =>
+                  `flex items-center gap-3 px-3 py-2 rounded-md transition-colors hover:bg-primary/10 ${
+                    isActive ? "bg-primary/20 text-primary font-semibold" : ""
+                  }`
+                }
+              >
+                <ContactRound size={22} />
+                My Profile
+              </NavLink>
+            </li>
+            {/* admin */}
             <li>
               <NavLink
                 to="/dashboard/create-decorator"

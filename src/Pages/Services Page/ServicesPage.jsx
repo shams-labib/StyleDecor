@@ -81,9 +81,11 @@ const ServicesPage = () => {
             onChange={(e) => setCategoryFilter(e.target.value)}
           >
             <option value="all">All Categories</option>
+            <option value="home">Home</option>
             <option value="wedding">Wedding</option>
-            <option value="birthday">Birthday</option>
             <option value="office">Office</option>
+            <option value="seminar">Seminar</option>
+            <option value="birthday">Birthday</option>
           </select>
 
           {/* Budget Range */}

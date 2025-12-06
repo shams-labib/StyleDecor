@@ -2,19 +2,27 @@ import React, { useState } from "react";
 import { Calendar, MapPin, Mail, User } from "lucide-react";
 import useAuth from "../../../Hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
+import { useParams, useNavigate } from "react-router";
+import Swal from "sweetalert2";
+import { useForm } from "react-hook-form";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
-import { useParams } from "react-router";
+import Loading from "../../Loader/Loading";
 
 const ServiceDetails = () => {
   const { user } = useAuth();
   const [openModal, setOpenModal] = useState(false);
-  const [bookingDate, setBookingDate] = useState("");
-  const [location, setLocation] = useState("");
 
   const axiosSecure = useAxiosSecure();
   const { id } = useParams();
+  const navigate = useNavigate();
 
-  // ✅ Fetch only the selected service
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm();
+
   const { data: service, isLoading } = useQuery({
     queryKey: ["service", id],
     queryFn: async () => {
@@ -23,38 +31,57 @@ const ServiceDetails = () => {
     },
   });
 
-  if (isLoading)
-    return (
-      <p className="text-center mt-10 text-lg font-semibold">Loading...</p>
-    );
+  if (isLoading) return <Loading></Loading>;
 
-  const handleBookSubmit = (e) => {
-    e.preventDefault();
-
+  const handleBookSubmit = (data) => {
     const bookingInfo = {
-      serviceId: service._id,
-      serviceName: service.service_name,
+      serviceName: service.serviceName,
       price: service.cost,
       userName: user?.displayName,
       userEmail: user?.email,
-      date: bookingDate,
-      location,
+      date: new Date(),
+      location: data.location,
+      category: service.category,
+      image: service.image,
     };
 
-    console.log("📦 Booking Data:", bookingInfo);
+    console.log(bookingInfo);
+
+    axiosSecure.post("/bookings", bookingInfo).then((res) => {
+      if (res.data.insertedId) {
+        Swal.fire({
+          icon: "success",
+          title: "Booking Confirmed!",
+          text: `Your booking for ${service.serviceName} is confirmed.`,
+        });
+      }
+    });
 
     setOpenModal(false);
+    reset(); // clear form
+  };
+
+  const handleBook = () => {
+    if (user) {
+      setOpenModal(true);
+    } else {
+      navigate("/login");
+      Swal.fire({
+        icon: "error",
+        title: "Please login first",
+      });
+    }
   };
 
   return (
-    <div className="container mx-auto p-6 min-h-screen">
+    <div className="container mx-auto p-6 min-h-screen flex flex-col justify-center items-center">
       {/* Card */}
       <div className="card lg:card-side bg-white dark:bg-gray-900 shadow-xl p-6">
         {/* Image */}
         <figure className="w-full lg:w-1/2">
           <img
             src={service?.image}
-            alt={service?.service_name}
+            alt={service?.serviceName}
             className="rounded-xl w-full object-cover h-80 lg:h-full"
           />
         </figure>
@@ -62,7 +89,7 @@ const ServiceDetails = () => {
         {/* Content */}
         <div className="card-body">
           <h2 className="card-title text-3xl font-bold">
-            {service?.service_name}
+            {service?.serviceName}
           </h2>
 
           <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
@@ -81,10 +108,7 @@ const ServiceDetails = () => {
           </div>
 
           <div className="card-actions mt-6">
-            <button
-              onClick={() => setOpenModal(true)}
-              className="btn btn-primary px-6"
-            >
+            <button onClick={handleBook} className="btn btn-primary px-6">
               Book Now
             </button>
           </div>
@@ -97,8 +121,11 @@ const ServiceDetails = () => {
           <div className="modal-box dark:bg-gray-800">
             <h3 className="font-bold text-2xl mb-4">Book This Service</h3>
 
-            {/* Booking Form */}
-            <form onSubmit={handleBookSubmit} className="space-y-4">
+            {/* Booking Form using React Hook Form */}
+            <form
+              onSubmit={handleSubmit(handleBookSubmit)}
+              className="space-y-4"
+            >
               {/* User Name */}
               <div className="form-control">
                 <label className="label font-semibold">Your Name</label>
@@ -134,12 +161,15 @@ const ServiceDetails = () => {
                   <Calendar size={18} />
                   <input
                     type="date"
-                    required
+                    {...register("bookingDate", { required: true })}
                     className="w-full bg-transparent outline-none"
-                    value={bookingDate}
-                    onChange={(e) => setBookingDate(e.target.value)}
                   />
                 </div>
+                {errors.bookingDate && (
+                  <span className="text-red-500 text-sm">
+                    Booking date is required
+                  </span>
+                )}
               </div>
 
               {/* Location */}
@@ -149,13 +179,16 @@ const ServiceDetails = () => {
                   <MapPin size={18} />
                   <input
                     type="text"
-                    required
                     placeholder="Event location"
+                    {...register("location", { required: true })}
                     className="w-full bg-transparent outline-none"
-                    value={location}
-                    onChange={(e) => setLocation(e.target.value)}
                   />
                 </div>
+                {errors.location && (
+                  <span className="text-red-500 text-sm">
+                    Location is required
+                  </span>
+                )}
               </div>
 
               {/* Submit */}

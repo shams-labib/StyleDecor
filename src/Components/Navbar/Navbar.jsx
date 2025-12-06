@@ -61,9 +61,16 @@ const Navbar = () => {
       </li>
       <li>
         <CustomNavLink to="/dashboard" onClick={() => setDrawerOpen(false)}>
-          Dashboard
+          Contact
         </CustomNavLink>
       </li>
+      {user && (
+        <li>
+          <CustomNavLink to="/dashboard" onClick={() => setDrawerOpen(false)}>
+            Dashboard
+          </CustomNavLink>
+        </li>
+      )}
     </>
   );
 

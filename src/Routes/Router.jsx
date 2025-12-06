@@ -16,6 +16,7 @@ import AllUsers from "../Pages/Dashboard/Admin/All Users/AllUsers";
 import CreateService from "../Pages/Dashboard/Admin/CreateService/CreateService";
 import ServicesDashboardComponent from "../Pages/Dashboard/Admin/ServicesList/ServicesList";
 import ServiceDetailsPage from "../Pages/Services Page/ServiceDetailsPage/ServiceDetailsPage";
+import MyBookings from "../Pages/Dashboard/User/MyProfile/MyBookings";
 
 export const router = createBrowserRouter([
   {
@@ -29,11 +30,7 @@ export const router = createBrowserRouter([
       { path: "/services", element: <ServicesPage /> },
       {
         path: "/servicesDetails/:id",
-        element: (
-          <PrivateRoute>
-            <ServiceDetailsPage />
-          </PrivateRoute>
-        ),
+        element: <ServiceDetailsPage />,
       },
     ],
   },
@@ -74,6 +71,11 @@ export const router = createBrowserRouter([
       {
         path: "services-list",
         Component: ServicesDashboardComponent,
+      },
+      // User Path
+      {
+        path: "my-profile",
+        Component: MyBookings,
       },
     ],
   },
