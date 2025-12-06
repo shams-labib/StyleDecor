@@ -14,6 +14,8 @@ import DashboardLayout from "../Layouts/DashboardLayout";
 import CreateDecoratorForm from "../Pages/Dashboard/Admin/CreateDecorator/CreateDecoratorForm ";
 import DecoratorList from "../Pages/Dashboard/Admin/DecoratorList/DecoratorList";
 import AllUsers from "../Pages/Dashboard/Admin/All Users/AllUsers";
+import CreateService from "../Pages/Dashboard/Admin/CreateService/CreateService";
+import ServicesDashboardComponent from "../Pages/Dashboard/Admin/ServicesList/ServicesList";
 
 export const router = createBrowserRouter([
   {
@@ -64,6 +66,14 @@ export const router = createBrowserRouter([
       {
         path: "all-users",
         Component: AllUsers,
+      },
+      {
+        path: "create-services",
+        Component: CreateService,
+      },
+      {
+        path: "services-list",
+        Component: ServicesDashboardComponent,
       },
     ],
   },

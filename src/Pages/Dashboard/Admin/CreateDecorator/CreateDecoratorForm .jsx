@@ -108,7 +108,7 @@ const CreateDecoratorForm = () => {
         {/* Submit Button */}
         <button
           type="submit"
-          className="mt-6 bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg"
+          className="mt-6 bg-primary cursor-pointer hover:bg-blue-700 text-white px-6 py-2 rounded-lg"
         >
           Create Decorator
         </button>

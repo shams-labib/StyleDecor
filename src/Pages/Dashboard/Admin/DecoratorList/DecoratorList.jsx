@@ -8,7 +8,7 @@ export default function DecoratorList() {
   const axiosSecure = useAxiosSecure();
 
   // Fetch decorators
-  const { data: initialDecorators = [] } = useQuery({
+  const { data: initialDecorators = [], refetch } = useQuery({
     queryKey: ["users", "decorators"],
     queryFn: async () => {
       const res = await axiosSecure.get("/users?role=decorator");
@@ -33,17 +33,29 @@ export default function DecoratorList() {
   };
 
   // Update decorator info + role
-  const onSubmit = async (data) => {
+  const onSubmit = async (formData) => {
     try {
-      await axiosSecure.patch(`/users/${selected._id}`, data);
+      const payload = { ...formData };
+      delete payload._id;
+
+      const updatePayload = {
+        name: payload.name,
+        email: payload.email,
+        role: payload.role,
+        experience: payload.experience,
+        address: payload.address,
+      };
+
+      await axiosSecure.patch(`/users/${selected._id}`, updatePayload);
 
       const updated = decorators.map((d) =>
-        d._id === selected._id ? { ...d, ...data } : d
+        d._id === selected._id ? { ...d, ...updatePayload } : d
       );
       setDecorators(updated);
 
       document.getElementById("editModal").close();
       Swal.fire("Success", "Decorator info updated!", "success");
+      refetch();
     } catch (err) {
       console.error(err);
       Swal.fire("Error", "Update failed!", "error");
@@ -123,7 +135,7 @@ export default function DecoratorList() {
             <div className="flex flex-wrap gap-2 mt-3">
               <button
                 onClick={() => openEditModal(item)}
-                className="btn btn-primary btn-sm"
+                className="btn btn-primary text-black btn-sm"
               >
                 Edit
               </button>

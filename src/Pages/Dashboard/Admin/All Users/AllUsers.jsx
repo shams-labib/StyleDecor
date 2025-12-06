@@ -12,7 +12,7 @@ const AllUsers = () => {
       .get("/users")
       .then((res) => setUsers(res.data))
       .catch((err) => console.error(err));
-  }, []); // Empty dependency to avoid infinite loop
+  }, [axiosSecure]); // Empty dependency to avoid infinite loop
 
   // Update user role
   const handleRoleChange = (userId, newRole) => {

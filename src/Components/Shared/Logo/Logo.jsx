@@ -15,7 +15,7 @@ const Logo = () => {
         className="md:h-12 md:w-12 w-10 h-10 rounded-full shadow-md"
       />
       <span className="md:text-2xl font-bold text-gray-800 dark:text-white">
-        MyBrand
+        StyleDecor
       </span>
     </Link>
   );

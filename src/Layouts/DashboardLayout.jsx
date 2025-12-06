@@ -4,20 +4,21 @@ import { FiUserPlus } from "react-icons/fi";
 import { Link, NavLink, Outlet } from "react-router";
 import logoImg from "../assets/logo.png";
 import { FaListOl, FaUserShield } from "react-icons/fa";
+import { LucidePencilRuler } from "lucide-react";
+import { BsCart4 } from "react-icons/bs";
 
 const DashboardLayout = () => {
   return (
     <div className="drawer lg:drawer-open">
       <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
-      <div className="drawer-content">
+      {/* Main content */}
+      <div className="drawer-content flex flex-col min-h-screen bg-gray-50">
         {/* Navbar */}
-        <nav className="navbar w-full bg-base-300">
+        <nav className="navbar bg-white shadow-md px-4 py-3 sticky top-0 z-50">
           <label
             htmlFor="my-drawer-4"
-            aria-label="open sidebar"
-            className="btn btn-square btn-ghost"
+            className="btn btn-square btn-ghost lg:hidden"
           >
-            {/* Sidebar toggle icon */}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -26,97 +27,113 @@ const DashboardLayout = () => {
               strokeWidth="2"
               fill="none"
               stroke="currentColor"
-              className="my-1.5 inline-block size-4"
+              className="w-6 h-6"
             >
               <path d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z"></path>
               <path d="M9 4v16"></path>
               <path d="M14 10l2 2l-2 2"></path>
             </svg>
           </label>
-          <div className="px-4">Navbar Title</div>
+          <div className="text-xl font-bold text-primary ml-2">Dashboard</div>
         </nav>
 
-        {/* Outlet */}
-
-        <Outlet></Outlet>
+        {/* Page content */}
+        <div className="p-6">
+          <Outlet />
+        </div>
       </div>
 
-      <div className="drawer-side is-drawer-close:overflow-visible">
-        <label
-          htmlFor="my-drawer-4"
-          aria-label="close sidebar"
-          className="drawer-overlay"
-        ></label>
-        <div className="flex min-h-full flex-col items-start bg-base-200 is-drawer-close:w-14 is-drawer-open:w-64">
-          {/* Sidebar content here */}
-          <ul className="menu w-full grow space-y-4">
-            <li>
-              <Link
-                to={"/"}
-                className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                data-tip="Homepage"
-              >
-                {/* Home icon */}
-                <img src={logoImg} className="w-12 rounded-full" alt="" />
-                <span className="is-drawer-close:hidden">My brand</span>
-              </Link>
-            </li>
+      {/* Sidebar */}
+      <div className="drawer-side">
+        <label htmlFor="my-drawer-4" className="drawer-overlay"></label>
+        <div className="flex min-h-full flex-col w-64 bg-white shadow-md">
+          {/* Logo */}
+          <div className="flex items-center justify-center py-6 border-b">
+            <img src={logoImg} className="w-20 rounded-full" alt="Logo" />
+          </div>
 
-            {/* List item */}
-            <li>
-              <Link
-                to={"/"}
-                className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                data-tip="Homepage"
-              >
-                {/* Home icon */}
-                <AiOutlineHome size={22} />
-                <span className="is-drawer-close:hidden">Homepage</span>
-              </Link>
-            </li>
-
-            {/* My list items */}
+          {/* Menu */}
+          <ul className="menu p-4 space-y-2 text-gray-700">
             <li>
               <NavLink
-                className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                data-tip="Create Decorator"
-                to={"/dashboard/create-decorator"}
+                to="/"
+                className={({ isActive }) =>
+                  `flex items-center gap-3 px-3 py-2 rounded-md transition-colors hover:bg-primary/10 ${
+                    isActive ? "bg-primary/20 text-primary font-semibold" : ""
+                  }`
+                }
+              >
+                <AiOutlineHome size={22} />
+                Homepage
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/dashboard/create-decorator"
+                className={({ isActive }) =>
+                  `flex items-center gap-3 px-3 py-2 rounded-md transition-colors hover:bg-primary/10 ${
+                    isActive ? "bg-primary/20 text-primary font-semibold" : ""
+                  }`
+                }
               >
                 <FiUserPlus size={22} />
-
-                <span className="is-drawer-close:hidden">Create Decorator</span>
+                Create Decorator
               </NavLink>
             </li>
             <li>
               <NavLink
-                className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                data-tip="All Users"
-                to={"/dashboard/all-users"}
+                to="/dashboard/all-users"
+                className={({ isActive }) =>
+                  `flex items-center gap-3 px-3 py-2 rounded-md transition-colors hover:bg-primary/10 ${
+                    isActive ? "bg-primary/20 text-primary font-semibold" : ""
+                  }`
+                }
               >
                 <FaUserShield size={22} />
-
-                <span className="is-drawer-close:hidden">All Users</span>
+                All Users
               </NavLink>
             </li>
             <li>
               <NavLink
-                className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                data-tip="Decorator List"
-                to={"/dashboard/decorator-list"}
+                to="/dashboard/decorator-list"
+                className={({ isActive }) =>
+                  `flex items-center gap-3 px-3 py-2 rounded-md transition-colors hover:bg-primary/10 ${
+                    isActive ? "bg-primary/20 text-primary font-semibold" : ""
+                  }`
+                }
               >
                 <FaListOl size={22} />
-
-                <span className="is-drawer-close:hidden">Decorator List</span>
+                Decorator List
               </NavLink>
             </li>
-
-            {/* List item */}
             <li>
-              <button
-                className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                data-tip="Settings"
+              <NavLink
+                to="/dashboard/create-services"
+                className={({ isActive }) =>
+                  `flex items-center gap-3 px-3 py-2 rounded-md transition-colors hover:bg-primary/10 ${
+                    isActive ? "bg-primary/20 text-primary font-semibold" : ""
+                  }`
+                }
               >
-                {/* Settings icon */}
+                <LucidePencilRuler size={22} />
+                Create Services
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/dashboard/services-list"
+                className={({ isActive }) =>
+                  `flex items-center gap-3 px-3 py-2 rounded-md transition-colors hover:bg-primary/10 ${
+                    isActive ? "bg-primary/20 text-primary font-semibold" : ""
+                  }`
+                }
+              >
+                <BsCart4 size={22} />
+                Services List
+              </NavLink>
+            </li>
+            <li>
+              <button className="flex items-center gap-3 px-3 py-2 rounded-md transition-colors hover:bg-primary/10 w-full text-left">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
@@ -125,14 +142,14 @@ const DashboardLayout = () => {
                   strokeWidth="2"
                   fill="none"
                   stroke="currentColor"
-                  className="my-1.5 inline-block size-4"
+                  className="w-6 h-6"
                 >
                   <path d="M20 7h-9"></path>
                   <path d="M14 17H5"></path>
                   <circle cx="17" cy="17" r="3"></circle>
                   <circle cx="7" cy="7" r="3"></circle>
                 </svg>
-                <span className="is-drawer-close:hidden">Settings</span>
+                Settings
               </button>
             </li>
           </ul>

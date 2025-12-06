@@ -39,6 +39,7 @@ const Register = () => {
           address: data.address,
           experience: data.experience,
           role: "user",
+          status: "",
         };
 
         axiosSecure

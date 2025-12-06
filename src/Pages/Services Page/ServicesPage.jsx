@@ -1,58 +1,50 @@
+import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
 import { Link } from "react-router";
-
-// Demo services data (locally)
-const demoServices = [
-  {
-    service_name: "Luxury Wedding Decoration",
-    cost: 50000,
-    unit: "per event",
-    category: "wedding",
-    description:
-      "Full wedding decoration including stage, lighting, flowers, and seating arrangement.",
-    image: "https://example.com/images/wedding1.jpg",
-  },
-  {
-    service_name: "Birthday Party Decoration",
-    cost: 15000,
-    unit: "per event",
-    category: "birthday",
-    description:
-      "Complete birthday decoration with balloons, banners, and theme setup.",
-    image: "https://example.com/images/birthday1.jpg",
-  },
-  {
-    service_name: "Office Event Decoration",
-    cost: 30000,
-    unit: "per event",
-    category: "office",
-    description:
-      "Professional office event decoration including stage, seating, and branding.",
-    image: "https://example.com/images/office1.jpg",
-  },
-];
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import Loading from "../Loader/Loading";
 
 const ServicesPage = () => {
-  const [services] = useState(demoServices);
+  const axiosSecure = useAxiosSecure();
+
+  const {
+    data: services = [],
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ["services"],
+    queryFn: async () => {
+      const res = await axiosSecure.get("/services");
+      return res.data;
+    },
+  });
+
   const [searchTerm, setSearchTerm] = useState("");
   const [categoryFilter, setCategoryFilter] = useState("all");
   const [budgetFilter, setBudgetFilter] = useState([0, 100000]);
 
   // Filter logic
   const filteredServices = services.filter((service) => {
-    const matchesSearch = service.service_name
+    const matchesSearch = service.serviceName
       .toLowerCase()
       .includes(searchTerm.toLowerCase());
     const matchesCategory =
       categoryFilter === "all" || service.category === categoryFilter;
     const matchesBudget =
-      service.cost >= budgetFilter[0] && service.cost <= budgetFilter[1];
+      Number(service.cost) >= budgetFilter[0] &&
+      Number(service.cost) <= budgetFilter[1];
     return matchesSearch && matchesCategory && matchesBudget;
   });
 
+  if (isLoading) return <Loading></Loading>;
+  if (isError)
+    return (
+      <p className="text-center mt-8 text-red-500">Error loading services.</p>
+    );
+
   return (
     <div className="p-4 md:p-6">
-      <h1 className="text-3xl md:text-4xl font-bold mb-6 text-center md:text-left">
+      <h1 className="text-3xl md:text-4xl font-bold mb-6 text-center ">
         Our Services
       </h1>
 
@@ -95,26 +87,26 @@ const ServicesPage = () => {
 
       {/* Services Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredServices.map((service, index) => (
+        {filteredServices.map((service) => (
           <div
-            key={index}
+            key={service._id}
             className="border rounded-lg overflow-hidden shadow hover:shadow-lg transition duration-300 flex flex-col"
           >
             <img
-              src={service.image}
-              alt={service.service_name}
+              src={service.image || "/default-image.png"}
+              alt={service.serviceName}
               className="w-full h-48 md:h-56 object-cover"
             />
             <div className="p-4 flex flex-col flex-1">
               <h2 className="text-xl font-semibold mb-2">
-                {service.service_name}
+                {service.serviceName}
               </h2>
               <p className="text-gray-600 mb-2 flex-1">{service.description}</p>
               <p className="font-bold mb-2">
                 {service.cost} BDT / {service.unit}
               </p>
               <Link
-                to={"/servicesDetails"}
+                to={`/servicesDetails/${service._id}`}
                 className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition mt-auto"
               >
                 View Details
