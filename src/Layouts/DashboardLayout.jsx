@@ -8,8 +8,16 @@ import { Album, ContactRound, LucidePencilRuler } from "lucide-react";
 import { BsCart4 } from "react-icons/bs";
 import { History } from "lucide-react";
 import { BookOpenText } from "lucide-react";
+import UseRole from "../Hooks/useRole";
+import Loading from "../Pages/Loader/Loading";
 
 const DashboardLayout = () => {
+  const { role, roleLoading } = UseRole();
+
+  if (roleLoading) {
+    return <Loading></Loading>;
+  }
+
   return (
     <div className="drawer lg:drawer-open dark:bg-gray-900">
       <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
@@ -69,125 +77,179 @@ const DashboardLayout = () => {
                 Homepage
               </NavLink>
             </li>
+
+            {/* Decorator Page */}
+
+            {role === "decorator" && (
+              <>
+                <li>
+                  <NavLink
+                    to="/dashboard/assigned-deliveries"
+                    className={({ isActive }) =>
+                      `flex items-center gap-3 px-3 py-2 rounded-md transition-colors hover:bg-primary/10 ${
+                        isActive
+                          ? "bg-primary/20 text-primary font-semibold"
+                          : ""
+                      }`
+                    }
+                  >
+                    <ContactRound size={22} />
+                    Assigned Deliveries
+                  </NavLink>
+                </li>
+              </>
+            )}
+
             {/* User page */}
-            <li>
-              <NavLink
-                to="/dashboard/my-profile"
-                className={({ isActive }) =>
-                  `flex items-center gap-3 px-3 py-2 rounded-md transition-colors hover:bg-primary/10 ${
-                    isActive ? "bg-primary/20 text-primary font-semibold" : ""
-                  }`
-                }
-              >
-                <ContactRound size={22} />
-                My Profile
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/dashboard/my-bookings"
-                className={({ isActive }) =>
-                  `flex items-center gap-3 px-3 py-2 rounded-md transition-colors hover:bg-primary/10 ${
-                    isActive ? "bg-primary/20 text-primary font-semibold" : ""
-                  }`
-                }
-              >
-                <Album size={22} />
-                My Bookings
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/dashboard/payment-history"
-                className={({ isActive }) =>
-                  `flex items-center gap-3 px-3 py-2 rounded-md transition-colors hover:bg-primary/10 ${
-                    isActive ? "bg-primary/20 text-primary font-semibold" : ""
-                  }`
-                }
-              >
-                <History />
-                Payment History
-              </NavLink>
-            </li>
+
+            {role === "user" && (
+              <>
+                {/* My Profile */}
+                <li>
+                  <NavLink
+                    to="/dashboard/my-profile"
+                    className={({ isActive }) =>
+                      `flex items-center gap-3 px-3 py-2 rounded-md transition-colors hover:bg-primary/10 ${
+                        isActive
+                          ? "bg-primary/20 text-primary font-semibold"
+                          : ""
+                      }`
+                    }
+                  >
+                    <ContactRound size={22} />
+                    My Profile
+                  </NavLink>
+                </li>
+                {/* My Bookings */}
+                <li>
+                  <NavLink
+                    to="/dashboard/my-bookings"
+                    className={({ isActive }) =>
+                      `flex items-center gap-3 px-3 py-2 rounded-md transition-colors hover:bg-primary/10 ${
+                        isActive
+                          ? "bg-primary/20 text-primary font-semibold"
+                          : ""
+                      }`
+                    }
+                  >
+                    <Album size={22} />
+                    My Bookings
+                  </NavLink>
+                </li>
+                {/* Payment History */}
+                <li>
+                  <NavLink
+                    to="/dashboard/payment-history"
+                    className={({ isActive }) =>
+                      `flex items-center gap-3 px-3 py-2 rounded-md transition-colors hover:bg-primary/10 ${
+                        isActive
+                          ? "bg-primary/20 text-primary font-semibold"
+                          : ""
+                      }`
+                    }
+                  >
+                    <History />
+                    Payment History
+                  </NavLink>
+                </li>
+              </>
+            )}
+
             {/* admin */}
-            <li>
-              <NavLink
-                to="/dashboard/manage-bookings"
-                className={({ isActive }) =>
-                  `flex items-center gap-3 px-3 py-2 rounded-md transition-colors hover:bg-primary/10 ${
-                    isActive ? "bg-primary/20 text-primary font-semibold" : ""
-                  }`
-                }
-              >
-                <BookOpenText />
-                Manage Bookings
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/dashboard/create-decorator"
-                className={({ isActive }) =>
-                  `flex items-center gap-3 px-3 py-2 rounded-md transition-colors hover:bg-primary/10 ${
-                    isActive ? "bg-primary/20 text-primary font-semibold" : ""
-                  }`
-                }
-              >
-                <FiUserPlus size={22} />
-                Create Decorator
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/dashboard/all-users"
-                className={({ isActive }) =>
-                  `flex items-center gap-3 px-3 py-2 rounded-md transition-colors hover:bg-primary/10 ${
-                    isActive ? "bg-primary/20 text-primary font-semibold" : ""
-                  }`
-                }
-              >
-                <FaUserShield size={22} />
-                All Users
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/dashboard/decorator-list"
-                className={({ isActive }) =>
-                  `flex items-center gap-3 px-3 py-2 rounded-md transition-colors hover:bg-primary/10 ${
-                    isActive ? "bg-primary/20 text-primary font-semibold" : ""
-                  }`
-                }
-              >
-                <FaListOl size={22} />
-                Decorator List
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/dashboard/create-services"
-                className={({ isActive }) =>
-                  `flex items-center gap-3 px-3 py-2 rounded-md transition-colors hover:bg-primary/10 ${
-                    isActive ? "bg-primary/20 text-primary font-semibold" : ""
-                  }`
-                }
-              >
-                <LucidePencilRuler size={22} />
-                Create Services
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/dashboard/services-list"
-                className={({ isActive }) =>
-                  `flex items-center gap-3 px-3 py-2 rounded-md transition-colors hover:bg-primary/10 ${
-                    isActive ? "bg-primary/20 text-primary font-semibold" : ""
-                  }`
-                }
-              >
-                <BsCart4 size={22} />
-                Services List
-              </NavLink>
-            </li>
+            {role === "admin" && (
+              <>
+                <li>
+                  <NavLink
+                    to="/dashboard/manage-bookings"
+                    className={({ isActive }) =>
+                      `flex items-center gap-3 px-3 py-2 rounded-md transition-colors hover:bg-primary/10 ${
+                        isActive
+                          ? "bg-primary/20 text-primary font-semibold"
+                          : ""
+                      }`
+                    }
+                  >
+                    <BookOpenText />
+                    Manage Bookings
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/dashboard/create-decorator"
+                    className={({ isActive }) =>
+                      `flex items-center gap-3 px-3 py-2 rounded-md transition-colors hover:bg-primary/10 ${
+                        isActive
+                          ? "bg-primary/20 text-primary font-semibold"
+                          : ""
+                      }`
+                    }
+                  >
+                    <FiUserPlus size={22} />
+                    Create Decorator
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/dashboard/all-users"
+                    className={({ isActive }) =>
+                      `flex items-center gap-3 px-3 py-2 rounded-md transition-colors hover:bg-primary/10 ${
+                        isActive
+                          ? "bg-primary/20 text-primary font-semibold"
+                          : ""
+                      }`
+                    }
+                  >
+                    <FaUserShield size={22} />
+                    All Users
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/dashboard/decorator-list"
+                    className={({ isActive }) =>
+                      `flex items-center gap-3 px-3 py-2 rounded-md transition-colors hover:bg-primary/10 ${
+                        isActive
+                          ? "bg-primary/20 text-primary font-semibold"
+                          : ""
+                      }`
+                    }
+                  >
+                    <FaListOl size={22} />
+                    Decorator List
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/dashboard/create-services"
+                    className={({ isActive }) =>
+                      `flex items-center gap-3 px-3 py-2 rounded-md transition-colors hover:bg-primary/10 ${
+                        isActive
+                          ? "bg-primary/20 text-primary font-semibold"
+                          : ""
+                      }`
+                    }
+                  >
+                    <LucidePencilRuler size={22} />
+                    Create Services
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/dashboard/services-list"
+                    className={({ isActive }) =>
+                      `flex items-center gap-3 px-3 py-2 rounded-md transition-colors hover:bg-primary/10 ${
+                        isActive
+                          ? "bg-primary/20 text-primary font-semibold"
+                          : ""
+                      }`
+                    }
+                  >
+                    <BsCart4 size={22} />
+                    Services List
+                  </NavLink>
+                </li>
+              </>
+            )}
             <li>
               <button className="flex items-center gap-3 px-3 py-2 rounded-md transition-colors hover:bg-primary/10 w-full text-left">
                 <svg

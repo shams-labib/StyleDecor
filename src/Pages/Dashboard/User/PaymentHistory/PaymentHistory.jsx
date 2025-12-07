@@ -3,13 +3,15 @@ import { Copy } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import Loading from "../../../Loader/Loading";
+import useAuth from "../../../../Hooks/useAuth";
 
 const PaymentHistory = () => {
   const axiosSecure = useAxiosSecure();
+  const { user } = useAuth();
   const { data: payments = [], isLoading } = useQuery({
     queryKey: ["payments"],
     queryFn: async () => {
-      const res = await axiosSecure.get("/payments");
+      const res = await axiosSecure.get(`/payments?email=${user?.email}`);
       return res.data;
     },
   });

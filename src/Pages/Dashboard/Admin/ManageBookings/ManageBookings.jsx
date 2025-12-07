@@ -16,7 +16,7 @@ const ManageBookings = () => {
   });
 
   const { data: riders = [], refetch: ridersRefetch } = useQuery({
-    queryKey: ["riders", "available"],
+    queryKey: ["riders", "approved"],
     enabled: !!selectedParcel,
     queryFn: async () => {
       const res = await axiosSecure.get(
@@ -36,28 +36,23 @@ const ManageBookings = () => {
 
   const handleAssignRider = async (rider) => {
     const riderAssignInfo = {
-      riderEmail: rider.email,
-      riderName: rider.name,
-      trackingId: selectedParcel.trackingId,
-      image: selectedParcel.image,
-      cost: selectedParcel.price,
-      location: selectedParcel.location,
-      category: selectedParcel.category,
+      decoratorEmail: rider.email,
+      decoratorName: rider.name,
+      decoratorStatus: "accepted",
     };
 
+    console.log(rider);
     try {
       const res = await axiosSecure.patch(
         `/bookings/${selectedParcel._id}/role`,
         riderAssignInfo
       );
-
       // Backend e decoratorsCollection.insertOne return kore
       if (res.data?.acknowledged) {
         riderModalRef.current.close(); // modal close
         setSelectedParcel(null); // selected item reset
         parcelsRefetch(); // UI refresh
         ridersRefetch();
-
         Swal.fire({
           position: "top-center",
           icon: "success",

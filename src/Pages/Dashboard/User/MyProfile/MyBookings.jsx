@@ -4,15 +4,17 @@ import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 import Loading from "../../../Loader/Loading";
+import useAuth from "../../../../Hooks/useAuth";
 
 const MyBookings = () => {
   const axiosSecure = useAxiosSecure();
   const [services, setServices] = useState([]);
+  const { user } = useAuth();
 
   const { isLoading, isError } = useQuery({
     queryKey: ["bookings"],
     queryFn: async () => {
-      const res = await axiosSecure.get("/bookings");
+      const res = await axiosSecure.get(`/bookings?email=${user?.email}`);
       setServices(res.data);
       return res.data;
     },

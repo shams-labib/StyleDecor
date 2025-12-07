@@ -22,6 +22,7 @@ import PaymentCancel from "../Pages/Dashboard/User/PaymentCancel/PaymentCancel";
 import Coverage from "../Pages/Landing/Map/Coverage";
 import PaymentHistory from "../Pages/Dashboard/User/PaymentHistory/PaymentHistory";
 import ManageBookings from "../Pages/Dashboard/Admin/ManageBookings/ManageBookings";
+import AssignDeliveries from "../Pages/DecoratorPage/AssignDeliveries/AssignDeliveries";
 
 export const router = createBrowserRouter([
   {
@@ -91,6 +92,7 @@ export const router = createBrowserRouter([
       { path: "payment-cancelled", Component: PaymentCancel },
       { path: "payment-history", Component: PaymentHistory },
       { path: "manage-bookings", Component: ManageBookings },
+      { path: "assigned-deliveries", Component: AssignDeliveries },
     ],
   },
 ]);

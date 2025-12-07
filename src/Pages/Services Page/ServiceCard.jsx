@@ -1,9 +1,30 @@
 import React from "react";
 import { Link } from "react-router";
 import { motion } from "framer-motion";
-import { ArrowRight, Tag } from "lucide-react";
+import { ArrowRight, Tag, Star } from "lucide-react";
 
 const ServiceCard = ({ service }) => {
+  const renderStars = (rating) => {
+    const stars = [];
+    const fullStars = Math.floor(rating || 0); // full stars
+    const halfStar = rating - fullStars >= 0.5; // half star
+    const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
+
+    for (let i = 0; i < fullStars; i++) {
+      stars.push(<Star key={`full-${i}`} className="text-yellow-400" />);
+    }
+
+    if (halfStar) {
+      stars.push(<Star key="half" className="text-yellow-400 opacity-50" />);
+    }
+
+    for (let i = 0; i < emptyStars; i++) {
+      stars.push(<Star key={`empty-${i}`} className="text-gray-300" />);
+    }
+
+    return stars;
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -30,13 +51,21 @@ const ServiceCard = ({ service }) => {
 
         {/* Category with animated icon */}
         <motion.p
-          className="text-gray-600 dark:text-gray-300 mb-3 flex items-center gap-2"
+          className="text-gray-600 dark:text-gray-300 mb-2 flex items-center gap-2"
           whileHover={{ x: 3 }}
           transition={{ duration: 0.2 }}
         >
           <Tag size={18} className="text-primary" />
           {service.category}
         </motion.p>
+
+        {/* Rating */}
+        <div className="flex items-center gap-1 mb-3">
+          {renderStars(service.rating)}
+          <span className="text-gray-600 dark:text-gray-300 text-sm ml-2">
+            {service.rating?.toFixed(1) || "0.0"}
+          </span>
+        </div>
 
         {/* Price */}
         <p className="font-bold text-gray-800 dark:text-gray-200 mb-4">
