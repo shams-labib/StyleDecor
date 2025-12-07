@@ -7,6 +7,7 @@ import {
   ShoppingBasket,
   CircleDollarSign,
 } from "lucide-react";
+import { motion } from "framer-motion";
 import useAuth from "../../../Hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import { useParams, useNavigate } from "react-router";
@@ -14,6 +15,14 @@ import Swal from "sweetalert2";
 import { useForm } from "react-hook-form";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import Loading from "../../Loader/Loading";
+
+const iconAnim = {
+  hover: {
+    scale: 1.2,
+    rotate: 10,
+    transition: { type: "spring", stiffness: 300 },
+  },
+};
 
 const ServiceDetails = () => {
   const { user } = useAuth();
@@ -38,7 +47,7 @@ const ServiceDetails = () => {
     },
   });
 
-  if (isLoading) return <Loading></Loading>;
+  if (isLoading) return <Loading />;
 
   const handleBookSubmit = (data) => {
     const bookingInfo = {
@@ -52,8 +61,6 @@ const ServiceDetails = () => {
       image: service.image,
     };
 
-    console.log(bookingInfo);
-
     axiosSecure.post("/bookings", bookingInfo).then((res) => {
       if (res.data.insertedId) {
         Swal.fire({
@@ -65,7 +72,7 @@ const ServiceDetails = () => {
     });
 
     setOpenModal(false);
-    reset(); // clear form
+    reset();
   };
 
   const handleBook = () => {
@@ -82,20 +89,28 @@ const ServiceDetails = () => {
 
   return (
     <div className="container mx-auto p-6 min-h-screen flex flex-col justify-center items-center">
-      {/* Card */}
-      <div className="card lg:card-side bg-white dark:bg-gray-900 shadow-xl p-6">
+      {/* ======= SERVICE CARD ======= */}
+      <motion.div
+        initial={{ opacity: 0, y: 60 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="card lg:card-side bg-white dark:bg-gray-900 shadow-2xl p-6 rounded-2xl border border-gray-100 dark:border-gray-700 backdrop-blur"
+      >
         {/* Image */}
-        <figure className="w-full lg:w-1/2">
-          <img
+        <div className="w-full lg:w-1/2">
+          <motion.img
+            initial={{ scale: 0.9 }}
+            animate={{ scale: 1 }}
+            transition={{ duration: 0.6 }}
             src={service?.image}
             alt={service?.serviceName}
-            className="rounded-xl w-full object-cover h-80 lg:h-full"
+            className="rounded-xl w-full object-cover h-80 lg:h-full shadow-lg"
           />
-        </figure>
+        </div>
 
         {/* Content */}
-        <div className="card-body">
-          <h2 className="card-title text-3xl font-bold">
+        <div className="card-body space-y-3">
+          <h2 className="card-title text-3xl font-bold tracking-wide">
             {service?.serviceName}
           </h2>
 
@@ -106,7 +121,7 @@ const ServiceDetails = () => {
           <div className="mt-4 space-y-1">
             <p className="font-semibold">
               Category:{" "}
-              <span className="text-blue-600">{service?.category}</span>
+              <span className="text-primary">{service?.category}</span>
             </p>
 
             <p className="font-semibold text-xl text-green-600">
@@ -115,81 +130,84 @@ const ServiceDetails = () => {
           </div>
 
           <div className="card-actions mt-6">
-            <button onClick={handleBook} className="btn btn-primary px-6">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              className="btn btn-primary px-6 shadow-lg"
+              onClick={handleBook}
+            >
               Book Now
-            </button>
+            </motion.button>
           </div>
         </div>
-      </div>
+      </motion.div>
 
-      {/* Modal */}
+      {/* ======= MODAL ======= */}
       {openModal && (
-        <div className="modal modal-open">
-          <div className="modal-box dark:bg-gray-800">
-            <h3 className="font-bold text-2xl mb-4">Book This Service</h3>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="modal modal-open"
+        >
+          <motion.div
+            initial={{ scale: 0.7, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ type: "spring", stiffness: 200 }}
+            className="modal-box dark:bg-gray-800 rounded-xl shadow-xl"
+          >
+            <h3 className="font-bold text-2xl mb-4 text-center">
+              Book This Service
+            </h3>
 
-            {/* Booking Form using React Hook Form */}
             <form
               onSubmit={handleSubmit(handleBookSubmit)}
               className="space-y-4"
             >
-              {/* User Name */}
-              <div className="form-control">
-                <label className="label font-semibold">Your Name</label>
-                <div className="input input-bordered flex items-center gap-2">
-                  <User size={18} />
-                  <input
-                    type="text"
-                    value={user?.displayName}
-                    className="w-full bg-transparent outline-none"
-                  />
+              {/* FIELD COMPONENT */}
+              {[
+                {
+                  label: "Your Name",
+                  value: user?.displayName,
+                  icon: <User size={18} />,
+                },
+                {
+                  label: "Your Email",
+                  value: user?.email,
+                  icon: <Mail size={18} />,
+                },
+                {
+                  label: "Service Name",
+                  value: service?.serviceName,
+                  icon: <ShoppingBasket size={18} />,
+                },
+                {
+                  label: "Cost",
+                  value: service?.cost,
+                  icon: <CircleDollarSign size={18} />,
+                },
+              ].map((field, i) => (
+                <div key={i} className="form-control group">
+                  <label className="label font-semibold">{field.label}</label>
+                  <div className="input input-bordered flex items-center gap-2 group-hover:shadow-md transition-all duration-200">
+                    <motion.div whileHover="hover" variants={iconAnim}>
+                      {field.icon}
+                    </motion.div>
+                    <input
+                      type="text"
+                      value={field.value}
+                      disabled
+                      className="w-full bg-transparent outline-none"
+                    />
+                  </div>
                 </div>
-              </div>
-
-              {/* User Email */}
-              <div className="form-control">
-                <label className="label font-semibold">Your Email</label>
-                <div className="input input-bordered flex items-center gap-2">
-                  <Mail size={18} />
-                  <input
-                    type="email"
-                    value={user?.email}
-                    className="w-full bg-transparent outline-none"
-                  />
-                </div>
-              </div>
-              {/* Services Name */}
-              <div className="form-control">
-                <label className="label font-semibold">Services Name</label>
-                <div className="input input-bordered flex items-center gap-2">
-                  <ShoppingBasket size={18} />
-                  <input
-                    type="email"
-                    value={service?.serviceName}
-                    disabled
-                    className="w-full bg-transparent outline-none"
-                  />
-                </div>
-              </div>
-              {/* cost */}
-              <div className="form-control">
-                <label className="label font-semibold">Cost</label>
-                <div className="input input-bordered flex items-center gap-2">
-                  <CircleDollarSign size={18} />
-                  <input
-                    type="email"
-                    value={service?.cost}
-                    disabled
-                    className="w-full bg-transparent outline-none"
-                  />
-                </div>
-              </div>
+              ))}
 
               {/* Booking Date */}
-              <div className="form-control">
+              <div className="form-control group">
                 <label className="label font-semibold">Booking Date</label>
-                <div className="input input-bordered flex items-center gap-2">
-                  <Calendar size={18} />
+                <div className="input input-bordered flex items-center gap-2 group-hover:shadow-md">
+                  <motion.div variants={iconAnim} whileHover="hover">
+                    <Calendar size={18} />
+                  </motion.div>
                   <input
                     type="date"
                     {...register("bookingDate", { required: true })}
@@ -204,10 +222,12 @@ const ServiceDetails = () => {
               </div>
 
               {/* Location */}
-              <div className="form-control">
+              <div className="form-control group">
                 <label className="label font-semibold">Location</label>
-                <div className="input input-bordered flex items-center gap-2">
-                  <MapPin size={18} />
+                <div className="input input-bordered flex items-center gap-2 group-hover:shadow-md">
+                  <motion.div variants={iconAnim} whileHover="hover">
+                    <MapPin size={18} />
+                  </motion.div>
                   <input
                     type="text"
                     placeholder="Event location"
@@ -223,21 +243,26 @@ const ServiceDetails = () => {
               </div>
 
               {/* Submit */}
-              <button type="submit" className="btn btn-primary w-full">
+              <motion.button
+                whileHover={{ scale: 1.03 }}
+                className="btn btn-primary w-full shadow-lg"
+                type="submit"
+              >
                 Confirm Booking
-              </button>
+              </motion.button>
             </form>
 
             <div className="modal-action">
-              <button
+              <motion.button
+                whileHover={{ scale: 1.05 }}
                 onClick={() => setOpenModal(false)}
                 className="btn btn-outline btn-primary"
               >
                 Close
-              </button>
+              </motion.button>
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       )}
     </div>
   );

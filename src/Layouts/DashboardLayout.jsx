@@ -6,6 +6,8 @@ import logoImg from "../assets/logo.png";
 import { FaListOl, FaUserShield } from "react-icons/fa";
 import { Album, ContactRound, LucidePencilRuler } from "lucide-react";
 import { BsCart4 } from "react-icons/bs";
+import { History } from "lucide-react";
+import { BookOpenText } from "lucide-react";
 
 const DashboardLayout = () => {
   return (
@@ -103,7 +105,7 @@ const DashboardLayout = () => {
                   }`
                 }
               >
-                <Album size={22} />
+                <History />
                 Payment History
               </NavLink>
             </li>
@@ -117,7 +119,7 @@ const DashboardLayout = () => {
                   }`
                 }
               >
-                <FiUserPlus size={22} />
+                <BookOpenText />
                 Manage Bookings
               </NavLink>
             </li>

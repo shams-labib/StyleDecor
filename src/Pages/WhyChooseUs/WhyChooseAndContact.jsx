@@ -1,5 +1,5 @@
 import React from "react";
-import { CheckCircle, PhoneCall, MessageSquare } from "lucide-react";
+import { CheckCircle } from "lucide-react";
 
 const WhyChooseAndContact = () => {
   const features = [
@@ -22,10 +22,19 @@ const WhyChooseAndContact = () => {
           {features.map((item, index) => (
             <div
               key={index}
-              className="p-6 bg-white dark:bg-gray-900 cursor-pointer shadow-xl rounded-2xl flex items-start gap-4 hover:scale-105 transition-all duration-300 border"
+              className="group p-6 bg-white dark:bg-gray-900 cursor-pointer 
+              shadow-xl rounded-2xl flex items-start gap-4 border
+              hover:-translate-y-2 hover:shadow-2xl transition-all duration-300"
             >
-              <CheckCircle className="text-primary w-8 h-8" />
-              <p className="text-lg font-semibold text-gray-700">{item}</p>
+              {/* Animated Icon */}
+              <CheckCircle
+                className="text-primary w-8 h-8 transition-all duration-300 
+                group-hover:rotate-12 group-hover:scale-125"
+              />
+
+              <p className="text-lg font-semibold text-gray-700 dark:text-gray-300">
+                {item}
+              </p>
             </div>
           ))}
         </div>

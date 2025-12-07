@@ -1,5 +1,6 @@
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
+import { motion } from "framer-motion";
 
 const Banner = () => {
   const banners = [
@@ -9,37 +10,70 @@ const Banner = () => {
   ];
 
   return (
-    <div className="relative w-full">
+    <div className="relative w-full overflow-hidden">
       <Carousel
         autoPlay
         infiniteLoop
+        interval={4500}
         showThumbs={false}
         showStatus={false}
-        interval={4000}
+        swipeable
+        emulateTouch
+        stopOnHover={false}
       >
         {banners.map((banner, index) => (
           <div key={index} className="relative w-full">
-            <img
+            {/* IMAGE ZOOM ANIMATION */}
+            <motion.img
               src={banner}
-              alt={`Banner`}
-              className="w-full h-[270px] sm:h-[350px] md:h-[500px] lg:h-[500px] object-cover"
+              alt="banner"
+              initial={{ scale: 1.1 }}
+              animate={{ scale: 1 }}
+              transition={{ duration: 4, ease: "easeOut" }}
+              className="w-full h-[270px] sm:h-[350px] md:h-[500px] object-cover"
             />
 
-            {/* Overlay */}
-            <div className="absolute inset-0 flex flex-col justify-end md:justify-center items-start md:items-start bg-gradient-to-t from-black/40 to-transparent px-4 sm:px-8 md:px-16 py-4 sm:py-8 md:py-16">
-              <h2 className="text-white text-xl sm:text-2xl md:text-4xl font-bold mb-4">
-                Your Banner Title Here
-              </h2>
-              <p className="text-white text-sm sm:text-base md:text-lg mb-4 max-w-md">
-                Some catchy subtitle or description goes here.
-              </p>
-              <button className="px-6 py-2 bg-primary cursor-pointer text-white rounded hover:bg-blue-700 transition text-sm sm:text-base">
+            {/* GLASS OVERLAY + ANIMATION */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+
+            <div className="absolute inset-0 flex flex-col justify-end md:justify-center px-6 md:px-16 py-10 space-y-4">
+              {/* TITLE */}
+              <motion.h2
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+                className="text-white text-2xl sm:text-4xl md:text-5xl font-extrabold tracking-tight drop-shadow-xl"
+              >
+                Make Your Event Beautiful ✨
+              </motion.h2>
+
+              {/* SUBTEXT */}
+              <motion.p
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1 }}
+                className="text-white/90 text-sm sm:text-lg md:text-xl max-w-xl"
+              >
+                Professional decoration services to make your moments
+                unforgettable.
+              </motion.p>
+
+              {/* CTA BUTTON */}
+              <motion.button
+                whileHover={{ scale: 1.07 }}
+                whileTap={{ scale: 0.95 }}
+                className="px-6 py-3 bg-primary text-white rounded-lg shadow-xl font-semibold w-max
+                hover:bg-primary/90 transition text-sm sm:text-base"
+              >
                 Book Decoration Service
-              </button>
+              </motion.button>
             </div>
           </div>
         ))}
       </Carousel>
+
+      {/* SPOTLIGHT GLOW EFFECT */}
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.15),transparent)]"></div>
     </div>
   );
 };

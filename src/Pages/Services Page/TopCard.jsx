@@ -3,6 +3,8 @@ import React from "react";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import ServiceCard from "./ServiceCard";
 import { Link } from "react-router";
+import { motion } from "framer-motion";
+import { Sparkles } from "lucide-react";
 
 const TopCard = () => {
   const axiosSecure = useAxiosSecure();
@@ -22,7 +24,15 @@ const TopCard = () => {
     <section className="bg-gray-50 dark:bg-gray-900 py-12">
       <div className="container mx-auto px-4">
         {/* Section Title */}
-        <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 dark:text-gray-100 mb-10">
+        <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 dark:text-gray-100 mb-10 flex items-center justify-center gap-3">
+          <motion.span
+            initial={{ rotate: 0, scale: 1 }}
+            animate={{ rotate: [0, 10, -10, 0], scale: [1, 1.1, 1] }}
+            transition={{ duration: 2, repeat: Infinity }}
+            className="text-primary"
+          >
+            <Sparkles size={32} />
+          </motion.span>
           Top Services
         </h2>
 

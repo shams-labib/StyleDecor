@@ -6,6 +6,8 @@ import Logo from "../Shared/Logo/Logo";
 import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
 import { HiOutlineViewList } from "react-icons/hi";
+import { motion } from "framer-motion";
+import { Home, Layers, Info, MapPinned, Phone } from "lucide-react";
 
 const Navbar = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -45,30 +47,70 @@ const Navbar = () => {
   const links = (
     <>
       <li>
-        <CustomNavLink to="/" onClick={() => setDrawerOpen(false)}>
-          Home
+        <CustomNavLink to="/">
+          <motion.div
+            className="flex items-center gap-2"
+            whileHover={{ x: 4 }}
+            transition={{ type: "spring", stiffness: 300 }}
+          >
+            <Home size={18} />
+            <span>Home</span>
+          </motion.div>
         </CustomNavLink>
       </li>
+
       <li>
-        <CustomNavLink to="/services" onClick={() => setDrawerOpen(false)}>
-          Services
+        <CustomNavLink to="/services">
+          <motion.div
+            className="flex items-center gap-2"
+            whileHover={{ scale: 1.08 }}
+            transition={{ duration: 0.2 }}
+          >
+            <Layers size={18} />
+            <span>Services</span>
+          </motion.div>
         </CustomNavLink>
       </li>
+
       <li>
-        <CustomNavLink to="/about" onClick={() => setDrawerOpen(false)}>
-          About Us
+        <CustomNavLink to="/about">
+          <motion.div
+            className="flex items-center gap-2"
+            whileHover={{ rotate: 3 }}
+            transition={{ duration: 0.2 }}
+          >
+            <Info size={18} />
+            <span>About Us</span>
+          </motion.div>
         </CustomNavLink>
       </li>
+
       <li>
-        <CustomNavLink to="/coverage" onClick={() => setDrawerOpen(false)}>
-          Coverage
+        <CustomNavLink to="/coverage">
+          <motion.div
+            className="flex items-center gap-2"
+            whileHover={{ x: 3, scale: 1.05 }}
+            transition={{ type: "tween" }}
+          >
+            <MapPinned size={18} />
+            <span>Coverage</span>
+          </motion.div>
         </CustomNavLink>
       </li>
+
       <li>
-        <CustomNavLink to="/dashboard" onClick={() => setDrawerOpen(false)}>
-          Contact
+        <CustomNavLink to="/contact">
+          <motion.div
+            className="flex items-center gap-2"
+            whileHover={{ y: -3 }}
+            transition={{ type: "spring", stiffness: 250 }}
+          >
+            <Phone size={18} />
+            <span>Contact</span>
+          </motion.div>
         </CustomNavLink>
       </li>
+
       {user && (
         <li>
           <CustomNavLink to="/dashboard" onClick={() => setDrawerOpen(false)}>

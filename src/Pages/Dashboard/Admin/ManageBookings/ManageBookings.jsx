@@ -109,7 +109,7 @@ const ManageBookings = () => {
                       onClick={() => openAssignRiderModal(parcel)}
                       className="px-4 py-2 cursor-pointer bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg transition-colors duration-200"
                     >
-                      Assign Rider
+                      Find Decorator
                     </button>
                   ) : parcel.deliveryStatus === "Materials Prepared" ? (
                     <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full font-medium text-sm">
