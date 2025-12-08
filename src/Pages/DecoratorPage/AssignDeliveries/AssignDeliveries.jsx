@@ -98,8 +98,8 @@ const AssignDeliveries = () => {
                       <button
                         onClick={() =>
                           handleDeliveryStatusUpdate(
-                            parcel
-                            // "on-the-way-to-venue"
+                            parcel,
+                            "on-the-way-to-venue"
                           )
                         }
                         className="btn btn-sm bg-blue-600 text-white"
