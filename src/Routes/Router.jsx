@@ -23,6 +23,7 @@ import Coverage from "../Pages/Landing/Map/Coverage";
 import PaymentHistory from "../Pages/Dashboard/User/PaymentHistory/PaymentHistory";
 import ManageBookings from "../Pages/Dashboard/Admin/ManageBookings/ManageBookings";
 import AssignDeliveries from "../Pages/DecoratorPage/AssignDeliveries/AssignDeliveries";
+import Todayshedule from "../Pages/DecoratorPage/Todayshedule/Todayshedule";
 
 export const router = createBrowserRouter([
   {
@@ -93,6 +94,7 @@ export const router = createBrowserRouter([
       { path: "payment-history", Component: PaymentHistory },
       { path: "manage-bookings", Component: ManageBookings },
       { path: "assigned-deliveries", Component: AssignDeliveries },
+      { path: "today-shedule", Component: Todayshedule },
     ],
   },
 ]);

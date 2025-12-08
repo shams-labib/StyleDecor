@@ -99,6 +99,21 @@ const DashboardLayout = () => {
                 </li>
                 <li>
                   <NavLink
+                    to="/dashboard/today-shedule"
+                    className={({ isActive }) =>
+                      `flex items-center gap-3 px-3 py-2 rounded-md transition-colors hover:bg-primary/10 ${
+                        isActive
+                          ? "bg-primary/20 text-primary font-semibold"
+                          : ""
+                      }`
+                    }
+                  >
+                    <ContactRound size={22} />
+                    Today's Schedule
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
                     to="/dashboard/assigned-deliveries"
                     className={({ isActive }) =>
                       `flex items-center gap-3 px-3 py-2 rounded-md transition-colors hover:bg-primary/10 ${

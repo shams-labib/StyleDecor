@@ -107,7 +107,7 @@ const ManageBookings = () => {
                     >
                       Find Decorator
                     </button>
-                  ) : parcel.deliveryStatus === "Materials Prepared" ? (
+                  ) : parcel.deliveryStatus === "materials-prepared" ? (
                     <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full font-medium text-sm">
                       Assigned
                     </span>
