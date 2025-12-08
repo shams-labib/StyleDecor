@@ -55,7 +55,7 @@ const PaymentHistory = () => {
 
                   <td>
                     <span className="font-bold">
-                      ${p.amount.toLocaleString()}
+                      {p.amount.toLocaleString()} BDT
                     </span>
                   </td>
 

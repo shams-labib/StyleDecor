@@ -27,7 +27,7 @@ import Todayshedule from "../Pages/DecoratorPage/Todayshedule/Todayshedule";
 import EarningSummary from "../Pages/DecoratorPage/Earning Summary/EarningSummary";
 
 import AboutUsPage from "../Pages/AboutUs/AboutPage";
-import ContactUsPage from "../Pages/Contact/ContactUsPage";
+// import AdminDashboardHome from "../Pages/Dashboard/Admin/AdminDashboardHome/AdminDashboardHome";
 
 export const router = createBrowserRouter([
   {
@@ -42,13 +42,7 @@ export const router = createBrowserRouter([
         element: <ServiceDetailsPage />,
       },
       {
-        path: "/contact",
-
-        element: <ContactUsPage></ContactUsPage>,
-      },
-      {
         path: "/about",
-
         element: <AboutUsPage></AboutUsPage>,
       },
     ],
@@ -104,6 +98,7 @@ export const router = createBrowserRouter([
       { path: "assigned-deliveries", Component: AssignDeliveries },
       { path: "today-shedule", Component: Todayshedule },
       { path: "earings-summary", Component: EarningSummary },
+      // { path: "admin-dashboard", Component: AdminDashboardHome },
     ],
   },
 ]);

@@ -62,7 +62,7 @@ const Banner = () => {
       price: selectedService.cost,
       userName: user?.displayName,
       userEmail: user?.email,
-      bookingDate: data.bookingDate,
+      date: data.date,
       location: data.location,
       category: selectedService.category,
       image: selectedService.image,
@@ -222,11 +222,11 @@ const Banner = () => {
                   </motion.div>
                   <input
                     type="date"
-                    {...register("bookingDate", { required: true })}
+                    {...register("date", { required: true })}
                     className="w-full bg-transparent outline-none"
                   />
                 </div>
-                {errors.bookingDate && (
+                {errors.date && (
                   <span className="text-red-500 text-sm">
                     Booking date is required
                   </span>

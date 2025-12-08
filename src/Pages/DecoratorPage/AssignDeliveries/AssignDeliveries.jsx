@@ -89,7 +89,7 @@ const AssignDeliveries = () => {
                 </td>
 
                 <td>{parcel.location}</td>
-                <td className="font-bold">{parcel.price}</td>
+                <td className="font-bold">{parcel.price} BDT</td>
 
                 {/* Status / Confirm */}
                 <td>

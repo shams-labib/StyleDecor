@@ -5,7 +5,7 @@ import { FaMapMarkerAlt } from "react-icons/fa";
 import { motion } from "framer-motion";
 
 const Coverage = ({ coveragePromise }) => {
-  const position = [25.7466, 89.2517]; // default center
+  const position = [25.7466, 89.2517];
   const serviceData = use(coveragePromise);
   const mapRef = useRef(null);
 

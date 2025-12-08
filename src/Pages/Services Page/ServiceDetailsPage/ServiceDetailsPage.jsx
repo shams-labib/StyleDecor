@@ -24,7 +24,7 @@ const iconAnim = {
   },
 };
 
-const Banner = () => {
+const ServiceDetailsPage = () => {
   const { user } = useAuth();
   const [openModal, setOpenModal] = useState(false);
   const { id } = useParams();
@@ -54,7 +54,7 @@ const Banner = () => {
       price: service.cost,
       userName: user?.displayName,
       userEmail: user?.email,
-      bookingDate: data.bookingDate,
+      date: data.date,
       location: data.location,
       category: service.category,
       image: service.image,
@@ -201,11 +201,11 @@ const Banner = () => {
                   </motion.div>
                   <input
                     type="date"
-                    {...register("bookingDate", { required: true })}
+                    {...register("date", { required: true })}
                     className="w-full bg-transparent outline-none"
                   />
                 </div>
-                {errors.bookingDate && (
+                {errors.date && (
                   <span className="text-red-500 text-sm">
                     Booking date is required
                   </span>
@@ -258,4 +258,4 @@ const Banner = () => {
   );
 };
 
-export default Banner;
+export default ServiceDetailsPage;

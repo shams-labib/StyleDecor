@@ -12,6 +12,7 @@ import {
   BookOpenText,
   Settings,
   LayoutDashboard,
+  ShieldUser,
 } from "lucide-react";
 import { BsCart4 } from "react-icons/bs";
 import UseRole from "../Hooks/useRole";
@@ -100,14 +101,15 @@ const DashboardLayout = () => {
                   text="Today’s Schedule"
                 />
                 <SidebarItem
-                  to="/dashboard/earings-summary"
-                  icon={<BookOpenText />}
-                  text="Earnings Summary"
-                />
-                <SidebarItem
                   to="/dashboard/assigned-deliveries"
                   icon={<Album />}
                   text="Assigned Deliveries"
+                />
+
+                <SidebarItem
+                  to="/dashboard/earings-summary"
+                  icon={<BookOpenText />}
+                  text="Earnings Summary"
                 />
               </>
             )}
@@ -117,7 +119,7 @@ const DashboardLayout = () => {
               <>
                 <SidebarItem
                   to="/dashboard/my-profile"
-                  icon={<ContactRound />}
+                  icon={<ShieldUser />}
                   text="My Profile"
                 />
                 <SidebarItem
@@ -136,6 +138,11 @@ const DashboardLayout = () => {
             {/* ADMIN MENU */}
             {role === "admin" && (
               <>
+                {/* <SidebarItem
+                  to="/dashboard/admin-dashboard"
+                  icon={<FaUserShield size={22} />}
+                  text="Admin Dashboard"
+                /> */}
                 <SidebarItem
                   to="/dashboard/all-users"
                   icon={<FaUserShield size={22} />}
