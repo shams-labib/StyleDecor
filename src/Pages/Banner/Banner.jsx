@@ -63,6 +63,7 @@ const Banner = () => {
       userName: user?.displayName,
       userEmail: user?.email,
       date: data.date,
+      bookingsDate: new Date(),
       location: data.location,
       category: selectedService.category,
       image: selectedService.image,

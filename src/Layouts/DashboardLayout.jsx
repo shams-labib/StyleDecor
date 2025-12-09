@@ -138,11 +138,11 @@ const DashboardLayout = () => {
             {/* ADMIN MENU */}
             {role === "admin" && (
               <>
-                {/* <SidebarItem
+                <SidebarItem
                   to="/dashboard/admin-dashboard"
                   icon={<FaUserShield size={22} />}
                   text="Admin Dashboard"
-                /> */}
+                />
                 <SidebarItem
                   to="/dashboard/all-users"
                   icon={<FaUserShield size={22} />}

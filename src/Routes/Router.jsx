@@ -27,6 +27,7 @@ import Todayshedule from "../Pages/DecoratorPage/Todayshedule/Todayshedule";
 import EarningSummary from "../Pages/DecoratorPage/Earning Summary/EarningSummary";
 
 import AboutUsPage from "../Pages/AboutUs/AboutPage";
+import AdminDashboardHome from "../Pages/Dashboard/Admin/AdminDashboardHome/AdminDashboardHome";
 // import AdminDashboardHome from "../Pages/Dashboard/Admin/AdminDashboardHome/AdminDashboardHome";
 
 export const router = createBrowserRouter([
@@ -98,7 +99,7 @@ export const router = createBrowserRouter([
       { path: "assigned-deliveries", Component: AssignDeliveries },
       { path: "today-shedule", Component: Todayshedule },
       { path: "earings-summary", Component: EarningSummary },
-      // { path: "admin-dashboard", Component: AdminDashboardHome },
+      { path: "admin-dashboard", Component: AdminDashboardHome },
     ],
   },
 ]);

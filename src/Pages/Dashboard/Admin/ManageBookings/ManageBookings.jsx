@@ -111,6 +111,8 @@ const ManageBookings = () => {
                     <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full font-medium text-sm">
                       Assigned
                     </span>
+                  ) : parcel.deliveryStatus === "Completed" ? (
+                    <button className="btn bg-green-500">Completed</button>
                   ) : (
                     <button
                       className="px-4 py-2 bg-gray-400 text-white font-medium rounded-lg cursor-not-allowed"

@@ -33,6 +33,7 @@ const AuthProvider = ({ children }) => {
 
   const logOutUser = () => {
     setLoading(true);
+    localStorage.removeItem("token");
     return signOut(auth);
   };
 
@@ -43,13 +44,34 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setLoading(false);
       setUser(currentUser);
 
-      return () => {
-        unsubscribe();
-      };
+      if (currentUser) {
+        const loggedUser = { email: currentUser.email };
+
+        fetch("http://localhost:3000/getToken", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(loggedUser),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log("after getting token", data.token);
+
+            // Store token correctly
+            localStorage.setItem("token", data.token);
+          });
+      } else {
+        localStorage.removeItem("token");
+      }
+
+      setLoading(false);
     });
+
+    // Correct position
+    return () => unsubscribe();
   }, []);
 
   const authInfo = {

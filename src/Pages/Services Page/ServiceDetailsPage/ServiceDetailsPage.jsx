@@ -55,6 +55,7 @@ const ServiceDetailsPage = () => {
       userName: user?.displayName,
       userEmail: user?.email,
       date: data.date,
+      bookingsDate: new Date(),
       location: data.location,
       category: service.category,
       image: service.image,
