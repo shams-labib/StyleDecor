@@ -3,12 +3,13 @@ import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../../Hooks/useAuth";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { FaMoneyCheckAlt } from "react-icons/fa";
+import Loading from "../../Loader/Loading";
 
 const EarningSummary = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
 
-  const { data: parcels = [] } = useQuery({
+  const { data: parcels = [], isLoading } = useQuery({
     queryKey: ["bookings", user?.email, "Completed"],
     queryFn: async () => {
       const res = await axiosSecure.get(
@@ -17,6 +18,10 @@ const EarningSummary = () => {
       return res.data.data;
     },
   });
+
+  if (isLoading) {
+    return <Loading></Loading>;
+  }
 
   const calculateEarnings = (price) => {
     if (price > 80000) return 9999;

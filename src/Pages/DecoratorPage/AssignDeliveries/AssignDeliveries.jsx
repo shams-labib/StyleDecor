@@ -3,11 +3,16 @@ import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 import useAuth from "../../../Hooks/useAuth";
 import { PackageCheck, Boxes } from "lucide-react";
+import Loading from "../../Loader/Loading";
 
 const AssignDeliveries = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
-  const { data: parcels = [], refetch } = useQuery({
+  const {
+    data: parcels = [],
+    refetch,
+    isLoading,
+  } = useQuery({
     queryKey: ["decorators", user?.email],
     queryFn: async () => {
       const res = await axiosSecure.get(
@@ -16,6 +21,10 @@ const AssignDeliveries = () => {
       return res.data.data;
     },
   });
+
+  if (isLoading) {
+    return <Loading></Loading>;
+  }
 
   const handleDeliveryStatusUpdate = (parcel, status) => {
     const statusInfo = { deliveryStatus: status };

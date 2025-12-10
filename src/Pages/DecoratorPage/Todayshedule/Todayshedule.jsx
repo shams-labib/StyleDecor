@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../../Hooks/useAuth";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import Loading from "../../Loader/Loading";
 
 const Todayshedule = () => {
   const [selectedDate, setSelectedDate] = useState(
@@ -12,7 +13,7 @@ const Todayshedule = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
 
-  const { data: parcels = [] } = useQuery({
+  const { data: parcels = [], isLoading } = useQuery({
     queryKey: ["decorators", user?.email],
     queryFn: async () => {
       const res = await axiosSecure.get(
@@ -21,6 +22,10 @@ const Todayshedule = () => {
       return res.data.data;
     },
   });
+
+  if (isLoading) {
+    return <Loading></Loading>;
+  }
 
   // Filter by selected date
   const filteredParcels = parcels.filter((parcel) => {

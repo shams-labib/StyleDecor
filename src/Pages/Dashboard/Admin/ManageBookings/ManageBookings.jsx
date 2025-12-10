@@ -2,12 +2,17 @@ import React, { useRef, useState } from "react";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
+import Loading from "../../../Loader/Loading";
 
 const ManageBookings = () => {
   const axiosSecure = useAxiosSecure();
   const [selectedParcel, setSelectedParcel] = useState(null);
 
-  const { data: parcels = [], refetch: parcelsRefetch } = useQuery({
+  const {
+    data: parcels = [],
+    refetch: parcelsRefetch,
+    isLoading,
+  } = useQuery({
     queryKey: ["bookings", "planning-phase"],
     queryFn: async () => {
       const res = await axiosSecure.get(`/bookings`);
@@ -15,7 +20,11 @@ const ManageBookings = () => {
     },
   });
 
-  const { data: riders = [], refetch: ridersRefetch } = useQuery({
+  const {
+    data: riders = [],
+    refetch: ridersRefetch,
+    isLoading: decoLoading,
+  } = useQuery({
     queryKey: ["riders", "approved"],
     enabled: !!selectedParcel,
     queryFn: async () => {
@@ -71,6 +80,10 @@ const ManageBookings = () => {
       });
     }
   };
+
+  if (isLoading) {
+    return <Loading></Loading>;
+  }
 
   return (
     <div>
