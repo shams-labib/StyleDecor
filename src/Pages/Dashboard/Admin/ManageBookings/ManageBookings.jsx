@@ -41,7 +41,6 @@ const ManageBookings = () => {
       decoratorStatus: "accepted",
     };
 
-    console.log(rider);
     try {
       const res = await axiosSecure.patch(
         `/bookings/${selectedParcel._id}/role`,

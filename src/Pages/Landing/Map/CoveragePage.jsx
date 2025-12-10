@@ -1,12 +1,13 @@
-import React, { use, useRef } from "react";
+import React, { useRef } from "react";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { motion } from "framer-motion";
+import { useLoaderData } from "react-router";
 
-const CoveragePage = ({ coveragePromise }) => {
+const CoveragePage = () => {
   const position = [25.7466, 89.2517];
-  const serviceData = use(coveragePromise);
+  const serviceData = useLoaderData();
   const mapRef = useRef(null);
 
   const handleSearch = (e) => {

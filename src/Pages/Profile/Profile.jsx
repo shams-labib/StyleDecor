@@ -19,8 +19,6 @@ const ProfileCard = () => {
     },
   });
 
-  console.log(profileData);
-
   // Final Profile Merge
   const profile = {
     name: user?.displayName || profileData.name,

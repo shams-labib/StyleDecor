@@ -49,7 +49,7 @@ const AuthProvider = ({ children }) => {
       if (currentUser) {
         const loggedUser = { email: currentUser.email };
 
-        fetch("http://localhost:3000/getToken", {
+        fetch("https://asignment-11.vercel.app/getToken", {
           method: "POST",
           headers: {
             "content-type": "application/json",
@@ -58,8 +58,6 @@ const AuthProvider = ({ children }) => {
         })
           .then((res) => res.json())
           .then((data) => {
-            console.log("after getting token", data.token);
-
             // Store token correctly
             localStorage.setItem("token", data.token);
           });

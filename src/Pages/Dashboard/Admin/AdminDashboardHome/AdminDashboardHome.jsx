@@ -23,8 +23,6 @@ const AdminDashboardHome = () => {
     queryFn: async () => (await axiosSecure.get("/bookings/book")).data,
   });
 
-  console.log(bookingsData);
-
   const { data: usersData = [] } = useQuery({
     queryKey: ["users"],
     queryFn: async () => (await axiosSecure.get("/users")).data,
@@ -49,8 +47,10 @@ const AdminDashboardHome = () => {
   ];
 
   return (
-    <div className="p-6 space-y-8 bg-gray-50 min-h-screen">
-      <h1 className="text-3xl font-bold text-gray-800 mb-6">Admin Dashboard</h1>
+    <div className="p-6 space-y-8 bg-gray-50 min-h-screen dark:bg-gray-900">
+      <h1 className="text-3xl font-bold text-gray-800 dark:text-white mb-6">
+        Admin Dashboard
+      </h1>
 
       {/* Analytics Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
@@ -66,7 +66,7 @@ const AdminDashboardHome = () => {
       </div>
 
       {/* Charts */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 ">
         {/* Pie Chart */}
         <div className="p-6 bg-white rounded-xl shadow-lg">
           <h2 className="text-xl font-semibold mb-4">Data Distribution</h2>

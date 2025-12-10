@@ -1,7 +1,8 @@
 import axios from "axios";
 
 const axiosSecure = axios.create({
-  baseURL: "http://localhost:3000",
+  // baseURL: "http://localhost:3000",
+  baseURL: "https://asignment-11.vercel.app",
 });
 
 // 🔐 Add Token Automatically in Each Request

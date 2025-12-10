@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
+import Loading from "../../../Loader/Loading";
 
 const ServicesDashboardComponent = () => {
   const axiosSecure = useAxiosSecure();
@@ -90,7 +91,7 @@ const ServicesDashboardComponent = () => {
     });
   };
 
-  if (isLoading) return <p>Loading services...</p>;
+  if (isLoading) return <Loading></Loading>;
   if (isError) return <p>Error loading services.</p>;
 
   return (
