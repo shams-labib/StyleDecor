@@ -6,7 +6,6 @@ const AllUsers = () => {
   const [users, setUsers] = useState([]);
   const axiosSecure = useAxiosSecure();
 
-  // Fetch all users
   useEffect(() => {
     axiosSecure
       .get("/users")
@@ -14,7 +13,6 @@ const AllUsers = () => {
       .catch((err) => console.error(err));
   }, [axiosSecure]); // Empty dependency to avoid infinite loop
 
-  // Update user role
   const handleRoleChange = (userId, newRole) => {
     axiosSecure
       .patch(`/users/${userId}`, { role: newRole })
@@ -28,7 +26,6 @@ const AllUsers = () => {
       .catch((err) => console.error(err));
   };
 
-  // Delete user
   const handleDelete = (userId) => {
     Swal.fire({
       title: "Are you sure?",
@@ -88,7 +85,6 @@ const AllUsers = () => {
               <td>{user.phone}</td>
               <td>{user.role}</td>
               <td className="flex gap-2">
-                {/* Role update select */}
                 <select
                   value={user.role}
                   onChange={(e) => handleRoleChange(user._id, e.target.value)}
@@ -99,7 +95,6 @@ const AllUsers = () => {
                   <option value="decorator">decorator</option>
                 </select>
 
-                {/* Delete button */}
                 <button
                   onClick={() => handleDelete(user._id)}
                   className="btn btn-error btn-sm"

@@ -39,9 +39,7 @@ const CreateDecoratorForm = () => {
       </h2>
 
       <form onSubmit={handleSubmit(onSubmit)}>
-        {/* Grid Layout */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Full Name */}
           <div>
             <label className="block mb-1 font-medium">Full Name</label>
             <input
@@ -52,7 +50,6 @@ const CreateDecoratorForm = () => {
             />
           </div>
 
-          {/* Email */}
           <div>
             <label className="block mb-1 font-medium">Email</label>
             <input
@@ -63,7 +60,6 @@ const CreateDecoratorForm = () => {
             />
           </div>
 
-          {/* experience */}
           <div>
             <label className="block mb-1 font-medium">Experience</label>
             <input
@@ -74,7 +70,6 @@ const CreateDecoratorForm = () => {
             />
           </div>
 
-          {/* Role */}
           <div>
             <label className="block mb-1 font-medium">Role</label>
             <select
@@ -87,7 +82,6 @@ const CreateDecoratorForm = () => {
             </select>
           </div>
 
-          {/* Address → Full width */}
           <div className="w-full md:col-span-2">
             <label className="block mb-1 font-medium">Address</label>
             <input
@@ -98,7 +92,6 @@ const CreateDecoratorForm = () => {
             />
           </div>
 
-          {/* Bio / Description (full width on desktop also) */}
           <div className="md:col-span-2">
             <label className="block mb-1 font-medium">Bio / Description</label>
             <textarea
@@ -110,7 +103,6 @@ const CreateDecoratorForm = () => {
           </div>
         </div>
 
-        {/* Submit Button */}
         <button
           type="submit"
           className="mt-6 bg-primary cursor-pointer hover:bg-blue-700 text-white px-6 py-2 rounded-lg"

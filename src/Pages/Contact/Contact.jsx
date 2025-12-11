@@ -5,11 +5,9 @@ import { motion } from "framer-motion";
 const Contact = () => {
   return (
     <section className="relative  dark:bg-gray-900 py-20 px-6 overflow-hidden">
-      {/* Background Glow */}
       <div className="absolute inset-0 pointer-events-none"></div>
 
       <div className="max-w-5xl mx-auto text-center space-y-6 relative z-10">
-        {/* Animated Floating Icons */}
         <motion.div
           initial={{ opacity: 0, scale: 0.7 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -33,7 +31,6 @@ const Contact = () => {
           </motion.div>
         </motion.div>
 
-        {/* Title */}
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -43,7 +40,6 @@ const Contact = () => {
           Need Decoration for Your Event?
         </motion.h2>
 
-        {/* Subtitle */}
         <motion.p
           initial={{ opacity: 0, y: 35 }}
           animate={{ opacity: 1, y: 0 }}
@@ -54,14 +50,12 @@ const Contact = () => {
           plan your special moment with professional decoration services.
         </motion.p>
 
-        {/* Buttons */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
           className="flex flex-col md:flex-row items-center justify-center gap-4 mt-10"
         >
-          {/* Call Button */}
           <motion.button
             whileHover={{ scale: 1.08 }}
             whileTap={{ scale: 0.95 }}
@@ -72,7 +66,6 @@ const Contact = () => {
             Call Now
           </motion.button>
 
-          {/* Message Button */}
           <motion.button
             whileHover={{ scale: 1.08 }}
             whileTap={{ scale: 0.95 }}

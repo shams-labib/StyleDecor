@@ -10,7 +10,7 @@ import {
 
 const AboutUs = () => {
   const headingRef = useRef(null);
-  const headingInView = useInView(headingRef, { once: true }); // animate once
+  const headingInView = useInView(headingRef, { once: true });
 
   const iconAnimation = {
     scale: [1, 1.2, 1],
@@ -57,7 +57,6 @@ const AboutUs = () => {
 
         {/* Right Side: Content */}
         <div>
-          {/* Heading with one-time animated Sparkles */}
           <h2
             ref={headingRef}
             className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-6 flex items-center gap-3"
@@ -87,7 +86,6 @@ const AboutUs = () => {
             professionalism and dedication.
           </p>
 
-          {/* Stats with continuously animated icons */}
           <div className="grid grid-cols-2 gap-6">
             {stats.map((stat, idx) => {
               const Icon = stat.icon;

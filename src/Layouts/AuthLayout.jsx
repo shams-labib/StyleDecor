@@ -6,20 +6,17 @@ import logoImg from "../assets/logo.png";
 const AuthLayout = () => {
   return (
     <div className="max-w-7xl mx-auto px-4">
-      {/* Top Logo */}
       <div className="py-6">
         <Logo />
       </div>
 
       <div className="flex flex-col md:flex-row items-center min-h-screen gap-10 md:gap-0">
-        {/* Left: Form Section */}
         <div className="flex-1 w-full md:w-1/2 flex justify-center">
           <div className="w-full max-w-md">
             <Outlet />
           </div>
         </div>
 
-        {/* Right: Banner Section */}
         <div className="flex-1 w-full md:w-[450px] hidden md:flex flex-col items-center">
           <img
             src={logoImg}

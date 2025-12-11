@@ -57,7 +57,6 @@ const AboutUsPage = () => {
 
         {/* Right Side: Content */}
         <div>
-          {/* Heading with one-time animated Sparkles */}
           <h2
             ref={headingRef}
             className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-6 flex items-center gap-3"
@@ -87,7 +86,6 @@ const AboutUsPage = () => {
             professionalism and dedication.
           </p>
 
-          {/* Stats with continuously animated icons */}
           <div className="grid grid-cols-2 gap-6">
             {stats.map((stat, idx) => {
               const Icon = stat.icon;

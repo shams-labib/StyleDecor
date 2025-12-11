@@ -86,7 +86,6 @@ const ServiceDetailsPage = () => {
 
   return (
     <div className="container mx-auto p-6 min-h-screen flex flex-col justify-center items-center">
-      {/* ======= SERVICE CARD ======= */}
       <motion.div
         initial={{ opacity: 0, y: 60 }}
         animate={{ opacity: 1, y: 0 }}
@@ -134,7 +133,6 @@ const ServiceDetailsPage = () => {
         </div>
       </motion.div>
 
-      {/* ======= MODAL ======= */}
       {openModal && (
         <motion.div
           initial={{ opacity: 0 }}

@@ -4,7 +4,6 @@ const Loading = () => {
   return (
     <div className="flex justify-center items-center h-screen">
       <div className="relative h-24 w-24">
-        {/* Outer glowing ring */}
         <div
           className="absolute inset-0 rounded-full"
           style={{
@@ -14,7 +13,6 @@ const Loading = () => {
           }}
         ></div>
 
-        {/* Middle neon pulse ring */}
         <div
           className="absolute inset-2 rounded-full"
           style={{
@@ -24,7 +22,6 @@ const Loading = () => {
           }}
         ></div>
 
-        {/* Inner anime chakra spin */}
         <svg
           className="absolute inset-4"
           viewBox="0 0 50 50"
@@ -39,7 +36,6 @@ const Loading = () => {
             </linearGradient>
           </defs>
 
-          {/* CHAOS swirl */}
           <circle
             cx="25"
             cy="25"
@@ -56,7 +52,6 @@ const Loading = () => {
           />
         </svg>
 
-        {/* Speed lines (anime motion blur) */}
         <div
           className="absolute left-1/2 top-1/2 h-20 w-1 bg-blue-500"
           style={{

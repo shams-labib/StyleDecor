@@ -25,7 +25,6 @@ const Brands = () => {
 
   return (
     <div className="py-12 bg-gray-50 dark:bg-gray-900 my-10">
-      {/* Section Title */}
       <div className="text-center mb-10">
         <h2 className="text-xl sm:text-4xl font-bold text-gray-800 dark:text-white">
           We Are Works With
@@ -35,7 +34,6 @@ const Brands = () => {
         </p>
       </div>
 
-      {/* Swiper */}
       <Swiper
         slidesPerView={1}
         spaceBetween={30}
@@ -50,7 +48,7 @@ const Brands = () => {
           768: { slidesPerView: 3 },
           1024: { slidesPerView: 4 },
         }}
-        navigation={false} // remove arrows
+        navigation={false}
       >
         {brandsLogo.map((logo, index) => (
           <SwiperSlide

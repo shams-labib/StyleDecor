@@ -5,10 +5,9 @@ const axiosSecure = axios.create({
   baseURL: "https://asignment-11.vercel.app",
 });
 
-// 🔐 Add Token Automatically in Each Request
 axiosSecure.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem("token"); // token name you stored
+    const token = localStorage.getItem("token");
 
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;

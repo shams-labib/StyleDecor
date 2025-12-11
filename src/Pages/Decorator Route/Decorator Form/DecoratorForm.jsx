@@ -11,7 +11,6 @@ const DecoratorForm = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
-    // convert comma-separated strings into arrays
     const payload = {
       ...data,
       specialty: data.specialty.split(",").map((s) => s.trim()),

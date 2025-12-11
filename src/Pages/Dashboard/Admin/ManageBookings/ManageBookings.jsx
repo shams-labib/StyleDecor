@@ -57,9 +57,9 @@ const ManageBookings = () => {
       );
       // Backend e decoratorsCollection.insertOne return kore
       if (res.data?.acknowledged) {
-        riderModalRef.current.close(); // modal close
-        setSelectedParcel(null); // selected item reset
-        parcelsRefetch(); // UI refresh
+        riderModalRef.current.close();
+        setSelectedParcel(null);
+        parcelsRefetch();
         ridersRefetch();
         Swal.fire({
           position: "top-center",
@@ -181,7 +181,6 @@ const ManageBookings = () => {
 
           <div className="modal-action">
             <form method="dialog">
-              {/* if there is a button in form, it will close the modal */}
               <button className="btn">Close</button>
             </form>
           </div>

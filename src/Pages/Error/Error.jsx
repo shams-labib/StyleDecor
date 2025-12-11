@@ -1,4 +1,3 @@
-// ErrorPage.jsx
 import React from "react";
 
 const ErrorPage = ({ code = 404, message = "Oops! Something went wrong." }) => {

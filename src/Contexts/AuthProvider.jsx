@@ -58,7 +58,6 @@ const AuthProvider = ({ children }) => {
         })
           .then((res) => res.json())
           .then((data) => {
-            // Store token correctly
             localStorage.setItem("token", data.token);
           });
       } else {
@@ -68,7 +67,6 @@ const AuthProvider = ({ children }) => {
       setLoading(false);
     });
 
-    // Correct position
     return () => unsubscribe();
   }, []);
 
