@@ -13,7 +13,7 @@ A **full-stack decoration booking platform** with **smart scheduling**, **real-t
 
 | Environment | URL |
 |------------|------|
-| **Client** | https://assignment-11-f293d.web.app |
+| **Client** | https://styledecorpro.netlify.app |
 | **Server** | https://asignment-11.vercel.app |
 
 **Admin Credentials**  
